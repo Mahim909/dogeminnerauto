@@ -1,0 +1,29 @@
+name: Auto Withdraw Cron
+
+on:
+  schedule:
+    # প্রতি ৪ ঘণ্টা পর পর চলবে (0, 4, 8, 12, 16, 20 UTC)
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Execute Withdraw Bot
+        env:
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
+        run: node withdraw.js
