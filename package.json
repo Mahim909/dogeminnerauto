@@ -1,0 +1,8 @@
+{
+  "name": "auto-withdraw-bot",
+  "version": "1.0.0",
+  "main": "withdraw.js",
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
